@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yonyou.ucf.mdf.app.application.mapper.INhSourceBillDtoMapper">
+
+    <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">
+        SELECT src_name, entitycode AS entityCode, period, batch_no ,
+        COUNT(*) AS sendCount, MIN(sysTime) AS sysTime
+        FROM nh_source_bill
+        <where>
+            <if test="sysBeginTime != null">
+                AND sysTime &gt;= #{sysBeginTime}
+            </if>
+            <if test="sysEndTime != null">
+                AND sysTime &lt;= #{sysEndTime}
+            </if>
+            <if test="srcName != null and srcName != ''">
+                AND src_name = #{srcName}
+            </if>
+            <if test="entityCode != null and entityCode != ''">
+                AND entitycode = #{entityCode}
+            </if>
+            <if test="batchNo != null and batchNo != ''">
+                AND batch_no = #{batchNo}
+            </if>
+            <if test="period != null and period != ''">
+                AND period = #{period}
+            </if>
+        </where>
+         GROUP BY entitycode, batch_no
+        LIMIT #{pageSize} OFFSET #{pageCount}
+    </select>
+
+
+<!--    <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">-->
+<!--        SELECT src_name, entitycode AS entityCode, period, batch_no,-->
+<!--        COUNT(*) AS sendCount, MIN(sysTime) AS sysTime-->
+<!--        FROM nh_source_bill-->
+<!--        WHERE entitycode = 'yz_gjhyjzfc'-->
+<!--        GROUP BY entityCode, batch_no-->
+<!--        LIMIT #{pageSize} OFFSET #{pageCount}-->
+<!--    </select>-->
+
+
+    <!--    <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">-->
+<!--        select  'name' ;-->
+<!--    </select>-->
+
+
+
+    <!--    无动态查询（除了limit）passed了-->
+<!--    <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultMap="NhSourceBillDtoResultMap">-->
+<!--        SELECT src_name AS srcName, entityCode AS entityCode, period, batch_no AS batchNo,-->
+<!--        COUNT(*) AS sendCount, MIN(sysTime) AS sysTime-->
+<!--        FROM nh_source_bill-->
+<!--        GROUP BY entityCode, batch_no-->
+<!--        LIMIT #{pageSize} OFFSET #{pageCount}-->
+<!--    </select>-->
+
+<!--    <resultMap id="NhSourceBillDtoResultMap" type="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">-->
+<!--        <id property="entityCode" column="entityCode"/>-->
+<!--        <result property="srcName" column="srcName"/>-->
+<!--        <result property="period" column="period"/>-->
+<!--        <result property="batchNo" column="batchNo"/>-->
+<!--        <result property="sendCount" column="sendCount"/>-->
+<!--        <result property="sysTime" column="sysTime" />-->
+<!--&lt;!&ndash;        <result property="sysTime" column="sysTime" typeHandler="com.example.SysTimeTypeHandler" />&ndash;&gt;-->
+<!--    </resultMap>-->
+
+<!-- Type handler was null on parameter mapping for property 'sysTime'. It was either not specified and/or could not be found for the javaType (javax.xml.crypto.Data) : jdbcType (null) combination.-->
+
+</mapper>

@@ -30,6 +30,6 @@ public class NhSourceBillServiceImpl implements INhSourceBillService {
         NhSourceBillResult(int pageSize, int currentPage, int totalCount, List<NhSourceBillDto> nhSourceBillDTODataList, int totalPage)
          */
         int totalCount = queryList.size();
-        return new NhSourceBillResult(request.getPageSize(), request.getCurrentPage(), totalCount,queryList);
+        return new NhSourceBillResult(request.getPageSize(), request.getCurrentPage()+1, totalCount,queryList);
     }
 }

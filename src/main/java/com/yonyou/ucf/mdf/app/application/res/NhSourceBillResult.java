@@ -2,14 +2,15 @@ package com.yonyou.ucf.mdf.app.application.res;
 
 
 import com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
-@Getter
-@Setter
-public class NhSourceBillResult {
+@Data
+public class NhSourceBillResult implements Serializable {
 
     /**
      * 用户传入的分页数据

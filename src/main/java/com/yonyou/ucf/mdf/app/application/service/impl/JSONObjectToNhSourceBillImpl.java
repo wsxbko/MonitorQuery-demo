@@ -1,7 +1,7 @@
 package com.yonyou.ucf.mdf.app.application.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yonyou.ucf.mdf.app.application.po.NhSourceBill;
+import com.yonyou.ucf.mdf.app.application.po.NhSourceBillPO;
 import com.yonyou.ucf.mdf.app.application.service.IJSONObjectToNhSourceBill;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,24 +20,24 @@ public class JSONObjectToNhSourceBillImpl implements IJSONObjectToNhSourceBill {
     "srctablename":"ads_opf_oil_int_settlement","tenantid":"qu8njvk0"}
      */
     @Override
-    public NhSourceBill exchange(JSONObject jsonObject) {
+    public NhSourceBillPO exchange(JSONObject jsonObject) {
 
-        NhSourceBill nhSourceBill = new NhSourceBill();
+        NhSourceBillPO nhSourceBillPO = new NhSourceBillPO();
         UUID uuid = UUID.randomUUID();
-        nhSourceBill.setId(uuid.toString());
+        nhSourceBillPO.setId(uuid.toString());
         //nhSourceBill.setId("00111");
-        nhSourceBill.setAction(jsonObject.getString("action"));
+        nhSourceBillPO.setAction(jsonObject.getString("action"));
 
         JSONObject dataObject = jsonObject.getJSONObject("data");
-        nhSourceBill.setPeriod(dataObject.getString("period"));
+        nhSourceBillPO.setPeriod(dataObject.getString("period"));
 
-        nhSourceBill.setBatchNo(jsonObject.getString("batch_no"));
-        nhSourceBill.setDataSource(jsonObject.getString("datasource"));
-        nhSourceBill.setSrcSystemCode(jsonObject.getString("srcsystemcode"));
-        nhSourceBill.setSrcTableName(jsonObject.getString("srctablename"));
-        nhSourceBill.setEntityCode(jsonObject.getString("entitycode"));
-        nhSourceBill.setSrcDataMsg(jsonObject.toJSONString());
+        nhSourceBillPO.setBatchNo(jsonObject.getString("batch_no"));
+        nhSourceBillPO.setDataSource(jsonObject.getString("datasource"));
+        nhSourceBillPO.setSrcSystemCode(jsonObject.getString("srcsystemcode"));
+        nhSourceBillPO.setSrcTableName(jsonObject.getString("srctablename"));
+        nhSourceBillPO.setEntityCode(jsonObject.getString("entitycode"));
+        nhSourceBillPO.setSrcDataMsg(jsonObject.toJSONString());
 
-        return nhSourceBill;
+        return nhSourceBillPO;
     }
 }

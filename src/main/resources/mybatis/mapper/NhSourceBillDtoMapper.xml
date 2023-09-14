@@ -28,9 +28,9 @@
             </if>
         </where>
          GROUP BY entitycode, batch_no
-        LIMIT #{pageSize} OFFSET #{pageCount}
+        LIMIT #{currentPage} , #{pageSize}
     </select>
-
+<!--    LIMIT #{pageSize} OFFSET #{pageCount}-->
 
 <!--    <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">-->
 <!--        SELECT src_name, entitycode AS entityCode, period, batch_no,-->

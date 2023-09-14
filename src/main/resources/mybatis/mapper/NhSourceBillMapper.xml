@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yonyou.ucf.mdf.app.application.mapper.INhSourceBillMapper">
-    <insert id="insertNhSourceBill" parameterType="com.yonyou.ucf.mdf.app.application.po.NhSourceBill">
+    <insert id="insertNhSourceBill" parameterType="com.yonyou.ucf.mdf.app.application.po.NhSourceBillPO">
         INSERT INTO nh_source_bill
         (src_name,id, entitycode, batch_no, datasource, srcsystemcode, srctablename, action, period, src_data_msg,sysTime)
         VALUES

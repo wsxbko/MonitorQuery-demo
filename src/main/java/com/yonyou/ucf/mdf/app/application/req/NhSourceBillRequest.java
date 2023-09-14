@@ -10,7 +10,7 @@ import java.util.Date;
 //@AllArgsConstructor
 //@NoArgsConstructor
 @Data
-public class NhSourceBillRequest {
+public class NhSourceBillRequest {//extends NHReviewsVO
 
     /**
      * 用户传入的分页数据
@@ -40,6 +40,7 @@ public class NhSourceBillRequest {
     private Date sysBeginTime;
 
     private Date sysEndTime;
+
 
     public int getPageSize() {
         return pageSize;

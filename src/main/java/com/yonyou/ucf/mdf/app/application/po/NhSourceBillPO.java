@@ -3,7 +3,7 @@ package com.yonyou.ucf.mdf.app.application.po;
 
 import java.util.Date;
 
-public class NhSourceBill {
+public class NhSourceBillPO {
 
   private String srcName;
   private String id;

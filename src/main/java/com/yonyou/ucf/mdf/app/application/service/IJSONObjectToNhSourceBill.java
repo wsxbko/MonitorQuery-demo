@@ -1,8 +1,8 @@
 package com.yonyou.ucf.mdf.app.application.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.yonyou.ucf.mdf.app.application.po.NhSourceBill;
+import com.yonyou.ucf.mdf.app.application.po.NhSourceBillPO;
 
 public interface IJSONObjectToNhSourceBill {
-    NhSourceBill exchange(JSONObject jsonObject);
+    NhSourceBillPO exchange(JSONObject jsonObject);
 }

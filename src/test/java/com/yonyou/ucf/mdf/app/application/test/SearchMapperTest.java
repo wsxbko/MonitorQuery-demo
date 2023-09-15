@@ -28,11 +28,12 @@ public class SearchMapperTest {
         //        无过滤条件
         //       NhSourceBillRequest request = new NhSourceBillRequest(5,1,5,"","","","",null,null);
 
-        NhSourceBillRequest request1 = new NhSourceBillRequest(5,1,5,"default_src_name","","","",null,null);
+        //下面不能test了，构造函数改了，关于limit 的 offset ，只是新增了这个参数
+        NhSourceBillRequest request1 = new NhSourceBillRequest(5,1,"default_src_name","","","",null,null);
 
-        NhSourceBillRequest request2 = new NhSourceBillRequest(5,0,0,"","yz_gjhyjzfc","","",null,null);
+        NhSourceBillRequest request2 = new NhSourceBillRequest(5,0,"","yz_gjhyjzfc","","",null,null);
 
-        NhSourceBillRequest request3 = new NhSourceBillRequest(5,1,5,"","","2023-08","",null,null);
+        NhSourceBillRequest request3 = new NhSourceBillRequest(5,1,"","","2023-08","",null,null);
 
         List<NhSourceBillDto> list1 = mapper.searchNhSourceBillList(request1);
         //logger.info(" lch debug 准备执行查询：Parameters: entityCode={}, srcName={}, period={}, batchNo={}", request2.getEntityCode(), request2.getSrcName(), request2.getPeriod(), request2.getBatchNo());

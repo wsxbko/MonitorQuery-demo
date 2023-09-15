@@ -20,7 +20,7 @@ public class NhSourceBillRequest {//extends NHReviewsVO
     // 当前页
     private int currentPage;
 
-    private int pageCount;
+    private int limitOffset;
 
     /**
      * 用户传入的查询参数
@@ -58,12 +58,21 @@ public class NhSourceBillRequest {//extends NHReviewsVO
         this.currentPage = currentPage;
     }
 
-    public int getPageCount() {
-        return pageCount;
+//    public int getPageCount() {
+//        return pageCount;
+//    }
+//
+//    public void setPageCount(int pageCount) {
+//        this.pageCount = pageCount;
+//    }
+
+
+    public int getLimitOffset() {
+        return limitOffset;
     }
 
-    public void setPageCount(int pageCount) {
-        this.pageCount = pageCount;
+    public void setLimitOffset(int limitOffset) {
+        this.limitOffset = limitOffset;
     }
 
     public String getSrcName() {
@@ -117,10 +126,23 @@ public class NhSourceBillRequest {//extends NHReviewsVO
     public NhSourceBillRequest() {
     }
 
-    public NhSourceBillRequest(int pageSize, int currentPage, int pageCount, String srcName, String entityCode, String period, String batchNo, Date sysBeginTime, Date sysEndTime) {
+//    public NhSourceBillRequest(int pageSize, int currentPage, int pageCount, String srcName, String entityCode, String period, String batchNo, Date sysBeginTime, Date sysEndTime) {
+//        this.pageSize = pageSize;
+//        this.currentPage = currentPage;
+//        //this.pageCount = pageCount;
+//        this.srcName = srcName;
+//        this.entityCode = entityCode;
+//        this.period = period;
+//        this.batchNo = batchNo;
+//        this.sysBeginTime = sysBeginTime;
+//        this.sysEndTime = sysEndTime;
+//    }
+
+
+    public NhSourceBillRequest(int pageSize, int currentPage, int limitOffset, String srcName, String entityCode, String period, String batchNo, Date sysBeginTime, Date sysEndTime) {
         this.pageSize = pageSize;
         this.currentPage = currentPage;
-        this.pageCount = pageCount;
+        this.limitOffset = limitOffset;
         this.srcName = srcName;
         this.entityCode = entityCode;
         this.period = period;
@@ -129,5 +151,14 @@ public class NhSourceBillRequest {//extends NHReviewsVO
         this.sysEndTime = sysEndTime;
     }
 
-
+    public NhSourceBillRequest(int pageSize, int currentPage, String srcName, String entityCode, String period, String batchNo, Date sysBeginTime, Date sysEndTime) {
+        this.pageSize = pageSize;
+        this.currentPage = currentPage;
+        this.srcName = srcName;
+        this.entityCode = entityCode;
+        this.period = period;
+        this.batchNo = batchNo;
+        this.sysBeginTime = sysBeginTime;
+        this.sysEndTime = sysEndTime;
+    }
 }

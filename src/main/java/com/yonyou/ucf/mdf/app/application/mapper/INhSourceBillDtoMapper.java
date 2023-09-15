@@ -11,4 +11,6 @@ import java.util.List;
 public interface INhSourceBillDtoMapper {
     List<NhSourceBillDto> searchNhSourceBillList (NhSourceBillRequest nhSourceBillRequest);
 
+    int countTotal(NhSourceBillRequest nhSourceBillRequest);
+
 }

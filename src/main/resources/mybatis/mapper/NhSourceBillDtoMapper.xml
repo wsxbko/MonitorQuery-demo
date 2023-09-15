@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yonyou.ucf.mdf.app.application.mapper.INhSourceBillDtoMapper">
-
+<!--这部分totalCount出错了，需要返回 所有可查询结果的记录数 ，但之前偷懒永了List<DTO>.size()-->
     <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">
         SELECT src_name, entitycode AS entityCode, period, batch_no ,
         COUNT(*) AS sendCount, MIN(sysTime) AS sysTime
@@ -28,8 +28,44 @@
             </if>
         </where>
          GROUP BY entitycode, batch_no
-        LIMIT #{currentPage} , #{pageSize}
+        LIMIT #{limitOffset} , #{pageSize}
     </select>
+
+
+
+<select id="countTotal" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType = "int">
+    SELECT COUNT(*)
+    FROM (
+    SELECT src_name, entitycode AS entityCode, period, batch_no ,
+    COUNT(*) AS sendCount, MIN(sysTime) AS sysTime
+    FROM nh_source_bill
+    <where>
+        <if test="sysBeginTime != null">
+            AND sysTime &gt;= #{sysBeginTime}
+        </if>
+        <if test="sysEndTime != null">
+            AND sysTime &lt;= #{sysEndTime}
+        </if>
+        <if test="srcName != null and srcName != ''">
+            AND src_name = #{srcName}
+        </if>
+        <if test="entityCode != null and entityCode != ''">
+            AND entitycode = #{entityCode}
+        </if>
+        <if test="batchNo != null and batchNo != ''">
+            AND batch_no = #{batchNo}
+        </if>
+        <if test="period != null and period != ''">
+            AND period = #{period}
+        </if>
+    </where>
+    GROUP BY entitycode, batch_no
+    ) AS subquery
+</select>
+
+
+
+
 <!--    LIMIT #{pageSize} OFFSET #{pageCount}-->
 
 <!--    <select id="searchNhSourceBillList" parameterType="com.yonyou.ucf.mdf.app.application.req.NhSourceBillRequest" resultType="com.yonyou.ucf.mdf.app.application.dto.NhSourceBillDto">-->

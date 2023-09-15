@@ -26,10 +26,12 @@ public class NhSourceBillServiceImpl implements INhSourceBillService {
     public NhSourceBillResult doSearchService(NhSourceBillRequest request) {
         //logger.info("Executing NH source bill query. Parameters: entityCode={}, srcName={}, period={}, batchNo={}", entityCode, srcName, period, batchNo);//根据查询返回结果集
         List<NhSourceBillDto> queryList = nhSourceBillDtoMapper.searchNhSourceBillList(request);
+
+
         /*
         NhSourceBillResult(int pageSize, int currentPage, int totalCount, List<NhSourceBillDto> nhSourceBillDTODataList, int totalPage)
          */
-        int totalCount = queryList.size();
+        int totalCount = nhSourceBillDtoMapper.countTotal(request);
         return new NhSourceBillResult(request.getPageSize(), request.getCurrentPage()+1, totalCount,queryList);
     }
 }

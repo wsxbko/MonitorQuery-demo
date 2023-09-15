@@ -8,6 +8,8 @@ import com.yonyou.ucf.mdf.app.application.res.NhSourceBillResult;
 import com.yonyou.ucf.mdf.app.application.res.R;
 import com.yonyou.ucf.mdf.app.application.service.impl.NhSourceBillServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/yonyo")
+@CrossOrigin(origins = "*")
 @Slf4j
 public class NhSourceBillController {
 
@@ -39,23 +42,51 @@ public class NhSourceBillController {
     @Autowired
     NhSourceBillServiceImpl nhSourceBillService;
 
+    Logger logger = LoggerFactory.getLogger(NhSourceBillController.class);
     @PostMapping("/test/search")
     public R<NhSourceBillResult> service(@RequestBody NHReviewsVO nhReviewsVO) {
-        NHConditionsVo nhConditionsVo = nhReviewsVO.getCondition();
-        NHPageVo nhPageVo = nhReviewsVO.getPagination();
+
+        logger.info(" 111接受到来自文森的请求 ： {} ",nhReviewsVO.toString());
+        //logger.info("Nh")
+
+      NHConditionsVo nhConditionsVo = nhReviewsVO.getCondition();
+      NHPageVo nhPageVo = nhReviewsVO.getPagination();
+//        try {
+//            NhSourceBillResult result = nhSourceBillService.doSearchService(alterRequest(nhPageVo,nhConditionsVo));
+//            logger.info("1111 result 打印结果 ：{}",result.toString());
+//            //return R.success(result);
+//            return R.success(null);
+//        } catch (Exception e) {
+//            return R.error(e.getMessage());
+//        }
+
+//        NhSourceBillRequest request = null;
         try {
-            return R.success(nhSourceBillService.doSearchService(alterRequest(nhPageVo,nhConditionsVo)));
+            //request = alterRequest(nhPageVo,nhConditionsVo);
+            NhSourceBillResult result = nhSourceBillService.doSearchService(alterRequest(nhPageVo,nhConditionsVo));
+            return R.success(result);
         } catch (Exception e) {
             return R.error(e.getMessage());
         }
+        //logger.info("1111 request 打印结果 ：{}",request.toString());
+
+        //logger.info("1111 result 打印结果 ：{}",result.toString());
+
 
     }
 
     public NhSourceBillRequest alterRequest(NHPageVo nhPageVo, NHConditionsVo nhConditionsVo){
         NhSourceBillRequest request = new NhSourceBillRequest();
         request.setPageSize(nhPageVo.getPageSize());
-        request.setCurrentPage(nhPageVo.getCurrent());
-        request.setPageCount(nhPageVo.getPageSize()*nhPageVo.getCurrent());
+
+        logger.info(" testtest **NHPageVO**: Current Page : {} ",nhPageVo.getCurrent());
+        // -1
+        request.setCurrentPage(nhPageVo.getCurrent()-1);
+        //new insert
+
+        request.setLimitOffset((nhPageVo.getCurrent()-1)*nhPageVo.getPageSize());
+        //request.setPageCount(nhPageVo.getPageSize()*(nhPageVo.getCurrent()));
+        //logger.info(" testtest ** request ** :Current Page = {} , PageSize = {} , PageCount = {}",request.getCurrentPage(),request.getPageSize(),request.getPageCount());
 
         request.setPeriod(nhConditionsVo.getPeriod());
         request.setEntityCode(nhConditionsVo.getEntityCode());

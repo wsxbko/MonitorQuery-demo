@@ -113,7 +113,8 @@ public class NhSourceBillController {
 //        request.setSrcName(srcName);
 //        request.setPeriod(period);// 设置请求参数的值
 //        request.setEntityCode(entitycode);
-//        request.setBatchNo(batchNo);
+//        request.setBatchNo(batchNo);git pull gittee master git add .
+//git commit -m "111"
 //        request.setSysBeginTime(sysBeginTime);
 //        request.setSysEndTime(sysEndTime);
 //        request.setCurrentPage(currentPage);
